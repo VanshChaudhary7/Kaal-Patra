@@ -1,0 +1,115 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal-content {
+  width: 100%;
+  max-width: 500px;
+  padding: 3rem 2rem;
+  text-align: center;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.judgment-content h2 {
+  font-size: 2rem;
+  color: var(--danger);
+  margin-bottom: 1rem;
+}
+
+.promise-quote {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 1.5rem 0;
+  padding: 1.5rem;
+  background: var(--bg-primary);
+  border-left: 4px solid var(--danger);
+  border-radius: 8px;
+  font-style: italic;
+}
+
+.judgment-question {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.judgment-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn-success-large, .btn-danger-large {
+  padding: 1.25rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  transition: opacity 0.2s;
+}
+
+.btn-success-large { background: var(--success); }
+.btn-danger-large { background: var(--danger); }
+
+.btn-success-large:hover, .btn-danger-large:hover { opacity: 0.9; }
+
+.modal-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.proof-content {
+  text-align: left;
+}
+
+.proof-content h3 {
+  font-size: 1.75rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.proof-content p {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.proof-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.proof-content form label {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.penalty-reminder {
+  padding: 1rem;
+  background: rgba(230, 57, 70, 0.1);
+  border-left: 3px solid var(--danger);
+  border-radius: 4px;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}

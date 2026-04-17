@@ -1,0 +1,28 @@
+.site-footer {
+  padding: 2rem 2rem;
+  background-color: var(--bg-primary);
+  border-top: 1px solid var(--border-subtle);
+  margin-top: auto;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-links span {
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.footer-links span:hover {
+  color: var(--text-secondary);
+}

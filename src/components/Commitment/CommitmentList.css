@@ -1,0 +1,14 @@
+.commitment-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.empty-state, .loading-state {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+  background: var(--bg-surface);
+  border-radius: 12px;
+  border: 1px dashed var(--border-strong);
+}

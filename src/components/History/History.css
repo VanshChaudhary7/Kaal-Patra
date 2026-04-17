@@ -1,0 +1,111 @@
+.history-container {
+  width: 100%;
+}
+
+.history-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.history-card {
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border-left-width: 4px;
+}
+
+.history-card:hover {
+  transform: translateY(-2px);
+}
+
+.border-danger { border-left-color: var(--danger); box-shadow: -20px 0 30px -20px var(--glow-danger); }
+.border-success { border-left-color: var(--success); box-shadow: -20px 0 30px -20px var(--glow-success); }
+
+.history-card-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.status-text {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.status-text.success { color: var(--success); }
+.status-text.failed { color: var(--danger); }
+
+.history-date {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.history-goal {
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.replay-modal {
+  max-width: 800px;
+  text-align: left;
+  position: relative;
+}
+
+.btn-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 1.5rem;
+  color: var(--text-muted);
+}
+
+.btn-close:hover { color: var(--text-primary); }
+
+.replay-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.replay-grid h3 {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
+.pad-box {
+  background: var(--bg-primary);
+  padding: 1.5rem;
+  border-radius: 8px;
+  height: 100%;
+}
+
+.pad-box p {
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.pad-box strong {
+  color: var(--text-secondary);
+}
+
+.replay-present.success .pad-box { border-top: 3px solid var(--success); }
+.replay-present.failed .pad-box { border-top: 3px solid var(--danger); }
+
+.proof-text, .reason-text {
+  background: var(--bg-surface);
+  padding: 1rem;
+  border-radius: 6px;
+  font-style: italic;
+  color: var(--text-muted) !important;
+}
+
+.penalty-callout {
+  margin-top: 1rem;
+  color: var(--danger) !important;
+  font-weight: 600;
+}

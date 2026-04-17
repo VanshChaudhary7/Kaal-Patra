@@ -1,0 +1,85 @@
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--border-subtle);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-brand a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brand-devanagari {
+  font-family: 'Noto Sans Devanagari', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--brand-primary);
+}
+
+.brand-english {
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.header-nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  color: var(--text-secondary);
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: var(--text-primary);
+}
+
+.header-user {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.user-email {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.btn-theme-toggle {
+  font-size: 1.25rem;
+  opacity: 0.6;
+  transition: opacity 0.2s, transform 0.2s;
+  padding: 0.25rem;
+}
+
+.btn-theme-toggle:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.btn-logout {
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-strong);
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.btn-logout:hover {
+  background-color: var(--bg-elevated);
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+}

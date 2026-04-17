@@ -1,0 +1,137 @@
+/* Global Styles - Premium Dark Theme */
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Default to Dark Mode */
+:root, [data-theme="dark"] {
+  --bg-base: #0F1115;
+  --bg-surface: #1C1E24;
+  --bg-surface-hover: #22252C;
+  --bg-elevated: #282B33;
+  
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  
+  --border-subtle: #334155;
+  --border-strong: #475569;
+  
+  --brand-primary: #E11D48; /* Accountability Red */
+  --brand-secondary: #BE123C;
+  
+  --success: #10B981;
+  --danger: #E11D48;
+  --warning: #F59E0B;
+  --info: #3B82F6;
+  
+  --glow-danger: rgba(225, 29, 72, 0.4);
+  --glow-success: rgba(16, 185, 129, 0.4);
+}
+
+[data-theme="light"] {
+  --bg-base: #F8FAFC;
+  --bg-surface: #FFFFFF;
+  --bg-surface-hover: #F1F5F9;
+  --bg-elevated: #F1F5F9;
+  
+  --text-primary: #0F1115;
+  --text-secondary: #334155;
+  --text-muted: #64748B;
+  
+  --border-subtle: #E2E8F0;
+  --border-strong: #0F1115; /* Sharp contrast for brutalist style */
+  
+  --brand-primary: #BE123C;
+  --brand-secondary: #9F1239;
+  
+  --success: #059669;
+  --danger: #BE123C;
+  --warning: #D97706;
+  --info: #2563EB;
+  
+  --glow-danger: rgba(190, 18, 60, 0.3);
+  --glow-success: rgba(5, 150, 105, 0.3);
+}
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#root {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-family: 'Fira Code', monospace;
+}
+
+.fira-font {
+  font-family: 'Fira Code', monospace !important;
+}
+
+a {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+}
+
+input, textarea, select {
+  font-family: inherit;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--text-secondary);
+  box-shadow: 0 0 0 2px rgba(161, 163, 168, 0.2);
+}
+
+/* Glass panel utility */
+.glass-panel {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme="light"] .glass-panel {
+  box-shadow: 6px 6px 0px 0px var(--border-strong);
+  border: 2px solid var(--border-strong);
+  border-radius: 4px; /* Harsher edges in brutalism light */
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }

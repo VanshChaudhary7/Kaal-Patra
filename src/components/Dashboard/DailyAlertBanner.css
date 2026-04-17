@@ -1,0 +1,70 @@
+.daily-alert-banner {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.2));
+  border-left: 4px solid #ef4444;
+  border-radius: var(--radius-md);
+  margin-bottom: 2rem;
+  padding: 1rem 1.5rem;
+  backdrop-filter: blur(10px);
+  animation: slideDownFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.alert-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.alert-icon {
+  font-size: 1.5rem;
+  animation: gentlePulse 2s infinite ease-in-out;
+}
+
+.alert-text strong {
+  color: #ef4444;
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  font-size: 1.05rem;
+}
+
+.alert-text p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+@keyframes slideDownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gentlePulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* Light mode adjustments */
+[data-theme='light'] .daily-alert-banner {
+  background: linear-gradient(135deg, rgba(254, 226, 226, 0.5), rgba(254, 202, 202, 0.7));
+  border-left-color: #dc2626;
+}
+
+[data-theme='light'] .alert-text strong {
+  color: #b91c1c;
+}
+
+[data-theme='light'] .alert-text p {
+  color: #4b5563;
+}
