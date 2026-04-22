@@ -3,7 +3,8 @@ import './AICoachCard.css';
 
 /**
  * AICoachCard
- * Displays the AI-generated coaching message with shimmer → typewriter reveal.
+ * Displays the AI-generated coaching message.
+ * States: shimmer skeleton while loading → full message once ready → error text on failure.
  */
 const AICoachCard = ({ message, isLoading, error }) => {
   if (!isLoading && !message && !error) return null;

@@ -10,6 +10,24 @@
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
 const GROQ_MODEL = 'llama-3.3-70b-versatile';
 
+// NOTE: VITE_GROQ_API_KEY is bundled into the client build.
+// For a production app, move this call behind a server-side endpoint
+// (e.g. a Firebase Callable Function) so the key is never shipped to the browser.
+// For this academic project the direct client call is acceptable.
+
+/**
+ * Safe localStorage helpers — storage can be unavailable or full.
+ */
+const safeGetCache = (key) => {
+  try { return localStorage.getItem(key); }
+  catch { return null; }
+};
+
+const safeSetCache = (key, value) => {
+  try { localStorage.setItem(key, value); }
+  catch { /* quota exceeded or storage disabled — silently skip cache */ }
+};
+
 /**
  * Build a cache key unique to this user + commitment + calendar day.
  */
@@ -76,7 +94,7 @@ export const getAICoachMessage = async ({
 
   // Check cache first
   const cacheKey = getCacheKey(uid, commitmentId);
-  const cached = localStorage.getItem(cacheKey);
+  const cached = safeGetCache(cacheKey);
   if (cached) return cached;
 
   const prompt = buildPrompt({ goal, sacrifice, progressLogs, integrityScore, daysRemaining });
@@ -104,7 +122,7 @@ export const getAICoachMessage = async ({
   const message = data.choices?.[0]?.message?.content?.trim() ?? 'Stay the course.';
 
   // Cache for this day
-  localStorage.setItem(cacheKey, message);
+  safeSetCache(cacheKey, message);
 
   return message;
 };

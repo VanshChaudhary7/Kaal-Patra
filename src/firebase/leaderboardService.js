@@ -73,12 +73,14 @@ export const removeLeaderboardEntry = async (uid) => {
 };
 
 /**
- * Fetch all public leaderboard entries.
- * @returns {Promise<Array>} sorted by integrityScore desc
+ * Fetch all public leaderboard entries, sorted by integrityScore descending.
+ * @returns {Promise<Array>}
  */
 export const fetchLeaderboard = async () => {
   const snapshot = await getDocs(collection(db, LEADERBOARD_COLLECTION));
-  return snapshot.docs.map((d) => ({ uid: d.id, ...d.data() }));
+  return snapshot.docs
+    .map((d) => ({ uid: d.id, ...d.data() }))
+    .sort((a, b) => (b.integrityScore ?? 0) - (a.integrityScore ?? 0));
 };
 
 /**

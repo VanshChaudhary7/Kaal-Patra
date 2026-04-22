@@ -29,9 +29,8 @@ const CommitmentCard = ({ commitment, onDelete }) => {
 
   const handleDelete = (e) => {
     e.stopPropagation(); // don't navigate when deleting
-    if (window.confirm('Are you sure you want to delete this locked commitment?')) {
-      onDelete(commitment.id);
-    }
+    e.preventDefault();  // don't scroll on Space key
+    onDelete(commitment.id); // confirmation lives in the parent (CommitmentsPage)
   };
 
   /* Derive a short status label + colour class */
@@ -47,7 +46,12 @@ const CommitmentCard = ({ commitment, onDelete }) => {
       onClick={handleCardClick}
       role="button"
       tabIndex={0}
-      onKeyDown={(e) => e.key === 'Enter' && handleCardClick()}
+      onKeyDown={(e) => {
+        // Activate on Enter or Space; ignore events from interactive children
+        if (e.target !== e.currentTarget) return;
+        if (e.key === 'Enter') { handleCardClick(); }
+        if (e.key === ' ')     { e.preventDefault(); handleCardClick(); }
+      }}
       aria-label={`View commitment: ${goal}`}
     >
       {/* Top row */}

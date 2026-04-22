@@ -135,11 +135,14 @@ const CommitmentDetailPage = () => {
     }
   };
 
-  /* ─── Progress percentage ─────────────────────────────── */
-  const created = new Date(createdAt).getTime();
-  const end = new Date(deadline).getTime();
+  /* ─── Progress percentage (guard against missing/invalid timestamps) ─── */
+  const createdTs = createdAt ? new Date(createdAt).getTime() : NaN;
+  const endTs     = deadline  ? new Date(deadline).getTime()  : NaN;
   const now = Date.now();
-  const progressPct = Math.min(100, Math.max(0, ((now - created) / (end - created)) * 100));
+  const hasValidRange = Number.isFinite(createdTs) && Number.isFinite(endTs) && endTs > createdTs;
+  const progressPct = hasValidRange
+    ? Math.min(100, Math.max(0, ((now - createdTs) / (endTs - createdTs)) * 100))
+    : 0;
 
   return (
     <div className="page cdp">
@@ -173,9 +176,11 @@ const CommitmentDetailPage = () => {
               ? '🚨 Check-in Required'
               : '✅ On Track'}
           </span>
-          <span className="cdp-created">
-            Forged on {formatDateTime(createdAt)}
-          </span>
+          {createdAt && (
+            <span className="cdp-created">
+              Forged on {formatDateTime(createdAt)}
+            </span>
+          )}
         </div>
 
         <h1 className="cdp-goal">{goal}</h1>
@@ -185,8 +190,8 @@ const CommitmentDetailPage = () => {
           <span className="cdp-sacrifice-val">{sacrifice}</span>
         </div>
 
-        {/* Time progress bar */}
-        {!isPending && (
+        {/* Time progress bar — only shown when both timestamps are valid */}
+        {!isPending && hasValidRange && (
           <div className="cdp-time-bar">
             <div className="cdp-time-bar-track">
               <div
