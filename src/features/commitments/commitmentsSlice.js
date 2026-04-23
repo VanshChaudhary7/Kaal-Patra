@@ -35,14 +35,19 @@ export const deleteCommitment = createAsyncThunk(
   }
 );
 
+const initialState = {
+  items: [],
+  status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
+  error: null,
+};
+
 const commitmentsSlice = createSlice({
   name: 'commitments',
-  initialState: {
-    items: [],
-    status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
-    error: null
+  initialState,
+  reducers: {
+    // Call this on logout to prevent stale data leaking into next session
+    resetCommitments: () => initialState,
   },
-  reducers: {},
   extraReducers: (builder) => {
     builder
       // Fetch
@@ -75,4 +80,5 @@ const commitmentsSlice = createSlice({
   }
 });
 
+export const { resetCommitments } = commitmentsSlice.actions;
 export default commitmentsSlice.reducer;

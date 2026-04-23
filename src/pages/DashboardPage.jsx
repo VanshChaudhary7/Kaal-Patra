@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuth } from '../context/AuthContext';
 import { fetchCommitments } from '../features/commitments/commitmentsSlice';
@@ -9,11 +9,13 @@ import './DashboardPage.css';
 
 const DashboardPage = () => {
   const dispatch = useDispatch();
-  const { user } = useAuth();
-  const status = useSelector((state) => state.commitments.status);
+  const { user }  = useAuth();
+  const status    = useSelector((state) => state.commitments.status);
 
-  // Ensure commitments are loaded (stats including daily streak are derived from them)
-  useEffect(() => {
+  // useLayoutEffect fires synchronously BEFORE the browser paints, so the
+  // fetch is already in-flight before the first frame is drawn.
+  // This eliminates the "flash of empty stats" on initial load.
+  useLayoutEffect(() => {
     if (user && status === 'idle') {
       dispatch(fetchCommitments(user.uid));
     }
