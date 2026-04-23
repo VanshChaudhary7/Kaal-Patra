@@ -89,3 +89,52 @@ export const getDetailedTimeRemaining = (unlockAt) => {
   };
 };
 
+/**
+ * Calculates the current consecutive day streak from a list of progress logs.
+ * A streak is maintained if there is a log for today or yesterday.
+ * @param {Array<{date: string}>} logs - Array of log entries with ISO date strings
+ * @returns {number} The current streak count
+ */
+export const getConsecutiveDayStreak = (logs) => {
+  if (!logs || logs.length === 0) return 0;
+
+  // 1. Extract unique dates (YYYY-MM-DD)
+  const uniqueDates = [...new Set(logs.map(log => {
+    const d = new Date(log.date);
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  }))];
+
+  // 2. Sort descending (newest first)
+  uniqueDates.sort((a, b) => new Date(b) - new Date(a));
+
+  const today = new Date();
+  const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+  
+  const yesterday = new Date(today);
+  yesterday.setDate(yesterday.getDate() - 1);
+  const yesterdayStr = `${yesterday.getFullYear()}-${String(yesterday.getMonth() + 1).padStart(2, '0')}-${String(yesterday.getDate()).padStart(2, '0')}`;
+
+  // 3. Check if streak is broken (no log today AND no log yesterday)
+  if (uniqueDates[0] !== todayStr && uniqueDates[0] !== yesterdayStr) {
+    return 0;
+  }
+
+  // 4. Count consecutive days backwards
+  let streak = 0;
+  let expectedDate = new Date(uniqueDates[0]); // Start counting from the most recent log (either today or yesterday)
+
+  for (let i = 0; i < uniqueDates.length; i++) {
+    const logDateStr = uniqueDates[i];
+    const expectedDateStr = `${expectedDate.getFullYear()}-${String(expectedDate.getMonth() + 1).padStart(2, '0')}-${String(expectedDate.getDate()).padStart(2, '0')}`;
+    
+    if (logDateStr === expectedDateStr) {
+      streak++;
+      expectedDate.setDate(expectedDate.getDate() - 1); // Move expected date back by 1 day
+    } else {
+      break; // Gap found, streak ends
+    }
+  }
+
+  return streak;
+};
+
