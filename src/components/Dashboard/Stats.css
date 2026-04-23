@@ -9,6 +9,51 @@
   cursor: default;
 }
 
+/* ── Loading skeleton ─────────────────────────────────────── */
+.stats-skeleton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.stats-skel-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(
+    90deg,
+    var(--bg-elevated) 25%,
+    var(--bg-surface-hover) 50%,
+    var(--bg-elevated) 75%
+  );
+  background-size: 200% 100%;
+  animation: skelMove 1.4s linear infinite;
+}
+
+.stats-skel-line {
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(
+    90deg,
+    var(--bg-elevated) 25%,
+    var(--bg-surface-hover) 50%,
+    var(--bg-elevated) 75%
+  );
+  background-size: 200% 100%;
+  animation: skelMove 1.4s linear infinite;
+}
+
+.stats-skel-line--md { width: 70%; }
+.stats-skel-line--sm { width: 50%; }
+
+@keyframes skelMove {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
 .stats-panel:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
