@@ -1,133 +1,62 @@
-# 📄 KaalPatra (कालपत्र)
+# Kaal-Patra (कालपत्र)
 
-*A letter across time*
-
-## Overview
-
-KaalPatra is a React-based time-locked messaging application that allows users to write messages to their future selves. Messages remain locked until a predefined unlock time, promoting intentional reflection and delayed gratification.
+Kaal-Patra tracks your commitments. It records your promises, measures your consistency, and displays your integrity score. We built it for the MSE2 course using React, Redux, and Firebase.
 
 ## Features
 
-- 📝 **Create Messages**: Write letters to your future self with custom unlock times
-- 🔒 **Time-Locked**: Messages are locked and hidden until the specified unlock time
-- 🔓 **Auto-Unlock**: Messages automatically become readable when the time arrives
-- 💾 **Local Storage**: All messages persist in your browser's localStorage
-- 🎨 **Dark Theme**: Beautiful dark-themed UI optimized for extended use
-- 📱 **Responsive**: Works on desktop and mobile devices
+- **Commitment Engine**: Create promises with specific deadlines and stakes.
+- **Dual-Tier Streak System**: Tracks your daily check-ins across all active commitments to calculate a single global streak.
+- **Integrity Score**: Measures your reliability based on your success and failure rates.
+- **Community Leaderboard**: Compares your performance against others in real-time.
+- **AI Coach**: Analyzes your streak and active commitments to generate motivational feedback via the Groq API.
+- **Local Caching**: Loads your dashboard instantly using browser storage while fetching updates in the background.
 
-## Tech Stack
+## Technology Stack
 
-- **React 19**: Modern React with hooks
-- **Vite**: Fast build tool and dev server
-- **localStorage**: Client-side data persistence
-- **CSS**: Component-scoped styling with dark theme
+- **Frontend**: React 19 (Vite)
+- **State Management**: Redux Toolkit, React Context API
+- **Routing**: React Router DOM
+- **Backend & Auth**: Firebase (Firestore, Authentication)
+- **Styling**: Vanilla CSS (Glassmorphism, cubic-bezier animations)
+- **AI Integration**: Groq API (Llama 3)
 
-## Getting Started
+## Local Setup
 
-### Prerequisites
+Follow these steps to run Kaal-Patra locally:
 
-- Node.js (v16 or higher)
-- npm or yarn
-
-### Installation
-
-1. Clone the repository
-2. Navigate to the project directory:
+1. **Clone the repository**
    ```bash
-   cd kaalpatra
+   git clone https://github.com/mahakaal2005/Kaal-Patra.git
+   cd Kaal-Patra
    ```
-3. Install dependencies:
+
+2. **Install dependencies**
    ```bash
    npm install
    ```
 
-### Development
+3. **Configure Firebase**
+   Create a `.env` file in the root directory and add your Firebase and Groq API keys:
+   ```env
+   VITE_FIREBASE_API_KEY=your_api_key
+   VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
+   VITE_FIREBASE_PROJECT_ID=your_project_id
+   VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+   VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+   VITE_FIREBASE_APP_ID=your_app_id
+   VITE_GROQ_API_KEY=your_groq_api_key
+   ```
 
-Run the development server:
+4. **Run the development server**
+   ```bash
+   npm run dev
+   ```
 
-```bash
-npm run dev
-```
+## Development Roles
 
-The app will be available at `http://localhost:5173`
+We divided the project into four feature-based roles for full-stack implementation:
 
-### Build
-
-Create a production build:
-
-```bash
-npm run build
-```
-
-### Preview Production Build
-
-```bash
-npm run preview
-```
-
-## Project Structure
-
-```
-kaalpatra/
-├── src/
-│   ├── components/
-│   │   ├── MessageForm.jsx       # Create new messages
-│   │   ├── MessageForm.css
-│   │   ├── MessageList.jsx       # Display all messages
-│   │   ├── MessageList.css
-│   │   ├── MessageCard.jsx       # Individual message card
-│   │   └── MessageCard.css
-│   ├── utils/
-│   │   ├── timeUtils.js          # Time comparison functions
-│   │   └── storageUtils.js       # localStorage operations
-│   ├── App.jsx                   # Main app component
-│   ├── App.css
-│   ├── index.css                 # Global styles
-│   └── main.jsx
-└── package.json
-```
-
-## Usage
-
-1. **Write a Message**: Enter your message in the text area
-2. **Set Unlock Time**: Choose a future date and time using the date picker
-3. **Lock It**: Click the "Lock Message" button
-4. **Wait**: The message will remain locked until the unlock time
-5. **View**: Once unlocked, the message content will be revealed
-
-## Data Model
-
-Each message is stored with the following structure:
-
-```javascript
-{
-  id: "unique-uuid",
-  message: "Your message content",
-  createdAt: "2024-04-07T10:30:00.000Z",
-  unlockAt: "2024-12-31T23:59:00.000Z"
-}
-```
-
-## Notes
-
-- Messages are stored in browser localStorage (no backend required)
-- Clearing browser data will delete all messages
-- Messages are device/browser specific
-- Time comparisons use system time
-
-## MSE2 Project
-
-This project was created as part of the MSE2 (Modern Software Engineering) course, demonstrating:
-- Component-based React architecture
-- State management with hooks
-- localStorage for data persistence
-- Time-based logic implementation
-- Responsive UI design
-
-## License
-
-MIT License - Created for educational purposes
-
----
-
-Made with ❤️ for MSE2 Project
+- **Core Infrastructure & Global State**: Configured Vite, Firebase Auth, React Router, and the Redux store.
+- **Commitments Engine**: Built the async Redux thunks, form validation, and Firestore write logic.
+- **Analytics & Derived State**: Engineered the Integrity Score and dual-tier streak algorithms using ES6 array methods.
+- **AI & Time Mechanics**: Handled Groq integration, local state for countdown timers, and auto-expiring commitments.
