@@ -8,7 +8,7 @@ import {
 import { auth } from '../firebase/config';
 import PropTypes from 'prop-types';
 import { store } from '../app/store';
-import { resetCommitments } from '../features/commitments/commitmentsSlice';
+import { resetCommitments, hydrateFromCache } from '../features/commitments/commitmentsSlice';
 
 const AuthContext = createContext();
 
@@ -37,6 +37,11 @@ export const AuthProvider = ({ children }) => {
       // stale commitments from session A never show during session B.
       if (oldUid !== newUid) {
         store.dispatch(resetCommitments());
+      }
+      
+      // Instantly load any locally cached data for this user
+      if (newUid) {
+        store.dispatch(hydrateFromCache(newUid));
       }
 
       prevUidRef.current = newUid;

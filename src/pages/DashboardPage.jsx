@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuth } from '../context/AuthContext';
 import { fetchCommitments } from '../features/commitments/commitmentsSlice';
@@ -10,16 +10,19 @@ import './DashboardPage.css';
 const DashboardPage = () => {
   const dispatch = useDispatch();
   const { user }  = useAuth();
-  const status    = useSelector((state) => state.commitments.status);
+  
+  // Track if we've fired the fetch for this mount so we don't spam Firestore
+  const fetchFired = useRef(false);
 
-  // useLayoutEffect fires synchronously BEFORE the browser paints, so the
-  // fetch is already in-flight before the first frame is drawn.
-  // This eliminates the "flash of empty stats" on initial load.
+  // useLayoutEffect fires synchronously BEFORE the browser paints.
+  // Because we now hydrate from cache in AuthContext, data might already be there.
+  // We still fetch once on mount to get the latest updates silently in the background.
   useLayoutEffect(() => {
-    if (user && status === 'idle') {
+    if (user && !fetchFired.current) {
+      fetchFired.current = true;
       dispatch(fetchCommitments(user.uid));
     }
-  }, [user, status, dispatch]);
+  }, [user, dispatch]);
 
   return (
     <div className="page dashboard-page">
