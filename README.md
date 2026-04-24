@@ -20,7 +20,7 @@ KaalPatra is a React-based time-locked messaging application that allows users t
 - **React 19**: Modern React with hooks
 - **Vite**: Fast build tool and dev server
 - **localStorage**: Client-side data persistence
-- **CSS**: Component-scoped styling with dark theme
+- **CSS**: Component-scoped styling with the dark theme
 
 ## Getting Started
 
