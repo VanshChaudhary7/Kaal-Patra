@@ -1,0 +1,25 @@
+# Kaal-Patra
+
+A commitment tracking and accountability application built with React, Redux, and Firebase.
+
+## Tech Stack
+
+- **Frontend**: React + Vite
+- **State Management**: Redux Toolkit
+- **Backend**: Firebase (Firestore, Auth)
+- **AI**: Groq API
+- **Styling**: CSS Modules
+
+## Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+## License
+
+MIT
